@@ -63,10 +63,10 @@ function clearAllOutlines() {
 
 function createLegendFromObject() {
   let html = "";
-  for (const { id, title, text } of descriptions) {
+  for (const [index, { id, title, text }] of descriptions.entries()) {
     const descriptionHtml = `
     <article class="legend__description" id="info${id}">
-    <h3>${title}</h3>
+    <h3>${index +1}. ${title}</h3>
     <p>${text}</p>
 </article>
     `;
