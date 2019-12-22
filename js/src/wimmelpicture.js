@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", initWimmelPicture);
 
 function initWimmelPicture() {
+
+  sortSvgOutlines();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   outlinesSvg.addEventListener("click", handleOutlineClick);
   outlinesSvg.addEventListener("keydown", handleKeydown);
@@ -76,4 +78,31 @@ function createLegendFromObject() {
   document
     .querySelector(".legend__descriptions")
     .insertAdjacentHTML("beforeend", html);
+}
+
+
+function sortSvgOutlines(){
+
+  const outlines = [...document.querySelectorAll(".wimmel__outlines > g")];
+
+  outlines.sort((a, b) => {
+    const aId = parseInt(a.id.substr(2));
+    const bId = parseInt(b.id.substr(2));
+    if(aId < bId){
+      return - 1;
+    } else if (aId > bId){
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+
+  const outlinesSvgContainer = document.querySelector(".wimmel__outlines");
+
+  outlinesSvgContainer.innerHTML = "";
+
+  for(const outline of outlines){
+    outlinesSvgContainer.insertAdjacentElement("beforeend", outline);
+  }
+
 }
