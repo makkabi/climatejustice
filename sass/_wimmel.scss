@@ -1,0 +1,38 @@
+.wimmel {
+  position: relative;
+
+  &__image {
+    display: block;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &__outlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    fill: transparent;
+    > g {
+      outline: none;
+      cursor: pointer;
+      &:hover,
+      &.focus {
+        fill: rgba(233, 153, 61, 0.8);
+      }
+      &.focus {
+        outline: 2px dotted greenyellow;
+      }
+    }
+  }
+
+  &__outline {
+    &--clicked {
+      > * {
+        fill: rgba(87, 233, 61, 0.8);
+      }
+    }
+  }
+}
