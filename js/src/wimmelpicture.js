@@ -32,7 +32,7 @@ function handleOutlineClick(e) {
 }
 
 function handleKeydown(e) {
-  console.log(e);
+  // I know .keyCode is deprecated, but it will work 100% in all relevant browsers
   if (e.keyCode === 27) {
     // Escape
     clearAllOutlines();
