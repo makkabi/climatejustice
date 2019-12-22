@@ -15,6 +15,8 @@ function initWimmelPicture() {
       e.currentTarget.classList.remove("focus")
     );
   }
+
+  createLegendFromObject();
 }
 
 function handleOutlineClick(e) {
@@ -57,4 +59,21 @@ function clearAllOutlines() {
   )) {
     outline.classList.remove("wimmel__outline--clicked");
   }
+}
+
+function createLegendFromObject() {
+  let html = "";
+  for (const { id, title, text } of descriptions) {
+    const descriptionHtml = `
+    <article class="legend__description" id="info${id}">
+    <h3>${title}</h3>
+    <p>${text}</p>
+</article>
+    `;
+    html += descriptionHtml;
+  }
+
+  document
+    .querySelector(".legend__descriptions")
+    .insertAdjacentHTML("beforeend", html);
 }
