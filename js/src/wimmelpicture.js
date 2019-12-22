@@ -12,6 +12,9 @@ function initWimmelPicture() {
     outline.addEventListener("focus", e => {
       clearAllOutlines();
       e.currentTarget.classList.add("focus");
+      // Scroll the element into view. (.scrollIntoView() didn't work).
+      const position = e.currentTarget.getBoundingClientRect();
+      window.scrollTo(position.left - window.innerWidth / 2, position.top - window.innerHeight / 2);
     });
     outline.addEventListener("focusout", e =>
       e.currentTarget.classList.remove("focus")
