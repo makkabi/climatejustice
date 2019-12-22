@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "babel": "babel js/src/wimmelpicture.js --watch --out-file js/dist/wimmelpicture.js --presets=@babel/preset-env",
-    "prettier": "prettier --write '**/*.html', 'js/src/*.js', 'sass/*.scss'",
+    "prettier": "prettier --write '**/*.html' 'js/src/*.js' 'sass/*.scss'",
     "sass": "node-sass --output-style compressed --watch sass --output sass/temp --source-map-embed true",
     "autoprefixer": "postcss sass/temp/style.css -u autoprefixer -d . --map --watch",
     "sync": "browser-sync start --files '**./*.html, *.css, js/dist/*.js' --server",
