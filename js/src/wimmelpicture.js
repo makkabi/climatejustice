@@ -4,17 +4,26 @@ function initWimmelPicture() {
 
   sortSvgOutlines();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
+  // Toggle mousedown class to prevent .focus class when elements are clicked.
+  outlinesSvg.addEventListener("mousedown", handleOutlineMouseDown);
+  outlinesSvg.addEventListener("mouseup", handleOutlineMouseUp);
+
   outlinesSvg.addEventListener("click", handleOutlineClick);
+
   outlinesSvg.addEventListener("keydown", handleKeydown);
 
   for (const outline of document.querySelectorAll(".wimmel__outlines > g")) {
     outline.tabIndex = "0";
+
     outline.addEventListener("focus", e => {
       clearAllOutlines();
+      if(e.currentTarget.classList.contains("mousedown")){
+        return;
+      }
       e.currentTarget.classList.add("focus");
       // Scroll the element into view. (.scrollIntoView() didn't work).
-      const position = e.currentTarget.getBoundingClientRect();
-      window.scrollTo(position.left - window.innerWidth / 2, position.top - window.innerHeight / 2);
+     const position = e.currentTarget.getBoundingClientRect();
+     window.scrollTo(position.left - window.innerWidth / 2, position.top - window.innerHeight / 2);
     });
     outline.addEventListener("focusout", e =>
       e.currentTarget.classList.remove("focus")
@@ -24,14 +33,33 @@ function initWimmelPicture() {
   createLegendFromObject();
 }
 
-function handleOutlineClick(e) {
-  clearAllOutlines();
+function handleOutlineMouseDown(e) {
+
   const clickedElement = e.target;
   const clickedOutline = clickedElement.closest(".wimmel__outlines > g");
   if (!clickedOutline) {
     return;
   }
+  clickedOutline.classList.add("mousedown");
+}
+function handleOutlineMouseUp(e) {
 
+const outlines = e.currentTarget.querySelectorAll(".mousedown");
+for(const outline of outlines){
+  outline.classList.remove("mousedown");
+}
+
+}
+
+function handleOutlineClick(e) {
+
+  const clickedElement = e.target;
+  const clickedOutline = clickedElement.closest(".wimmel__outlines > g");
+  if (!clickedOutline || clickedOutline.classList.contains("wimmel__outline--clicked")) {
+    clearAllOutlines();
+    return;
+  }
+  clearAllOutlines();
   clickedOutline.classList.add("wimmel__outline--clicked");
   clickedOutline.classList.remove("focus");
 }
