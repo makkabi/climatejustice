@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", initWimmelPicture);
 
 function initWimmelPicture() {
-
+  addTitleToOutlines();
   sortSvgOutlines();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   // Toggle mousedown class to prevent .focus class when elements are clicked.
@@ -17,13 +17,16 @@ function initWimmelPicture() {
 
     outline.addEventListener("focus", e => {
       clearAllOutlines();
-      if(e.currentTarget.classList.contains("mousedown")){
+      if (e.currentTarget.classList.contains("mousedown")) {
         return;
       }
       e.currentTarget.classList.add("focus");
       // Scroll the element into view. (.scrollIntoView() didn't work).
-     const position = e.currentTarget.getBoundingClientRect();
-     window.scrollTo(position.left - window.innerWidth / 2, position.top - window.innerHeight / 2);
+      const position = e.currentTarget.getBoundingClientRect();
+      window.scrollTo(
+        position.left - window.innerWidth / 2,
+        position.top - window.innerHeight / 2
+      );
     });
     outline.addEventListener("focusout", e =>
       e.currentTarget.classList.remove("focus")
@@ -34,7 +37,6 @@ function initWimmelPicture() {
 }
 
 function handleOutlineMouseDown(e) {
-
   const clickedElement = e.target;
   const clickedOutline = clickedElement.closest(".wimmel__outlines > g");
   if (!clickedOutline) {
@@ -43,19 +45,19 @@ function handleOutlineMouseDown(e) {
   clickedOutline.classList.add("mousedown");
 }
 function handleOutlineMouseUp(e) {
-
-const outlines = e.currentTarget.querySelectorAll(".mousedown");
-for(const outline of outlines){
-  outline.classList.remove("mousedown");
-}
-
+  const outlines = e.currentTarget.querySelectorAll(".mousedown");
+  for (const outline of outlines) {
+    outline.classList.remove("mousedown");
+  }
 }
 
 function handleOutlineClick(e) {
-
   const clickedElement = e.target;
   const clickedOutline = clickedElement.closest(".wimmel__outlines > g");
-  if (!clickedOutline || clickedOutline.classList.contains("wimmel__outline--clicked")) {
+  if (
+    !clickedOutline ||
+    clickedOutline.classList.contains("wimmel__outline--clicked")
+  ) {
     clearAllOutlines();
     return;
   }
@@ -111,17 +113,15 @@ function createLegendFromObject() {
     .insertAdjacentHTML("beforeend", html);
 }
 
-
-function sortSvgOutlines(){
-
+function sortSvgOutlines() {
   const outlines = [...document.querySelectorAll(".wimmel__outlines > g")];
 
   outlines.sort((a, b) => {
     const aId = parseInt(a.id.substr(2));
     const bId = parseInt(b.id.substr(2));
-    if(aId < bId){
-      return - 1;
-    } else if (aId > bId){
+    if (aId < bId) {
+      return -1;
+    } else if (aId > bId) {
       return 1;
     } else {
       return 0;
@@ -132,8 +132,20 @@ function sortSvgOutlines(){
 
   outlinesSvgContainer.innerHTML = "";
 
-  for(const outline of outlines){
+  for (const outline of outlines) {
     outlinesSvgContainer.insertAdjacentElement("beforeend", outline);
   }
+}
 
+function addTitleToOutlines() {
+  const outlines = [...document.querySelectorAll(".wimmel__outlines > g")];
+
+  for (const outline of outlines) {
+    const id = parseInt(outline.dataset.infoid);
+    const info = descriptions.find(description => description.id === id);
+    if (info) {
+      const titleHtml = `<title>${info.title}</title>`;
+      outline.insertAdjacentHTML("afterbegin", titleHtml);
+    }
+  }
 }
