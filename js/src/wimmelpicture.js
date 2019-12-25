@@ -53,10 +53,8 @@ function initWimmelDialog() {
 
   dialog.customShowModal = function() {
     document.body.classList.add("open-modal-dialog");
-
-    document.body.addEventListener("click", dialog.closeDialogOnOutsideClick);
-
     this.showModal();
+    document.body.addEventListener("click", dialog.closeDialogOnOutsideClick);
   };
 
   dialog.closeDialogOnOutsideClick = function(e) {
@@ -109,6 +107,10 @@ function handleOutlineClick(e) {
   clearAllOutlines();
   clickedOutline.classList.add("wimmel__outline--clicked");
   clickedOutline.classList.remove("focus");
+  const id = clickedOutline.dataset.infoid;
+  // Prevent modal from beeing immediately closed again.
+  e.stopPropagation();
+  openModal(id);
 }
 
 function handleKeydown(e) {
@@ -131,6 +133,10 @@ function handleKeydown(e) {
   clearAllOutlines();
   focusedOutline.classList.add("wimmel__outline--clicked");
   e.preventDefault();
+  const id = focusedOutline.dataset.infoid;
+  // Prevent modal from beeing immediately closed again.
+  e.stopPropagation();
+  openModal(id);
 }
 
 function clearAllOutlines() {
@@ -139,6 +145,24 @@ function clearAllOutlines() {
   )) {
     outline.classList.remove("wimmel__outline--clicked");
   }
+}
+
+function openModal(selectedId) {
+  console.log(selectedId);
+  selectedId = parseInt(selectedId);
+
+  const description = descriptions.find(({ id }) => id === selectedId);
+  console.log(description);
+  if (!description) {
+    return;
+  }
+
+  const dialog = document.querySelector(".dialog");
+
+  dialog.querySelector(".dialog__title").innerHTML = description.title;
+  dialog.querySelector(".dialog__text").innerHTML = description.text;
+
+  dialog.customShowModal();
 }
 
 function createLegendFromObject() {
