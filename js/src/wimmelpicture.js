@@ -4,6 +4,7 @@ function initWimmelPicture() {
   // addLinkToOutlines();
   // sortSvgOutlines();
   // addDescriptionsNavigation();
+  addAriaAttributesToOutlineLinks();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   // Toggle mousedown class to prevent .focus class when elements are clicked.
   outlinesSvg.addEventListener("mousedown", handleOutlineMouseDown);
@@ -162,4 +163,11 @@ function addDescriptionsNavigation() {
     .join("");
 
   document.querySelector(".legend__nav__list").innerHTML = linksHtml;
+}
+
+function addAriaAttributesToOutlineLinks() {
+  for (const link of document.querySelectorAll(".wimmel__outlines > g > a")) {
+    link.setAttribute("role", "button");
+    link.setAttribute("aria-haspopup", true);
+  }
 }
