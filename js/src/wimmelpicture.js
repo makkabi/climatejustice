@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", initWimmelPicture);
 
 function initWimmelPicture() {
-  addLinkToOutlines();
-  sortSvgOutlines();
+  // addLinkToOutlines();
+  // sortSvgOutlines();
   // addDescriptionsNavigation();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   // Toggle mousedown class to prevent .focus class when elements are clicked.
