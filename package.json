@@ -8,7 +8,7 @@
     "prettier": "prettier --write '**/*.html' 'js/src/*.js' 'sass/*.scss'",
     "sass": "node-sass --output-style compressed --watch sass --output sass/temp --source-map-embed true",
     "autoprefixer": "postcss sass/temp/style.css -u autoprefixer -d . --map --watch",
-    "sync": "browser-sync start --files '**./*.html, *.css, js/dist/*.js' --server",
+    "sync": "browser-sync start --files '**/*.html, *.css, js/dist/*.js' --server",
     "build": "npm-run-all --parallel babel sass autoprefixer sync"
   },
   "keywords": [],
