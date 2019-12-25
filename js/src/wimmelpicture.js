@@ -33,7 +33,7 @@ function initWimmelPicture() {
     );
   }
 
-  createLegendFromObject();
+ // createLegendFromObject();
 }
 
 function handleOutlineMouseDown(e) {
