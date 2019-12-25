@@ -11,6 +11,10 @@
   </head>
   <body>
     <main>
+      <header>
+        <p><a href="#nav">Inhaltsverzeichnis</a></p>
+        <p><a href="#info">Anmerkungen</a></p>
+      </header>
       <div class="wimmel">
         <img
           class="wimmel__image"
@@ -1265,7 +1269,9 @@
         <header>
           <h2>Legende</h2>
           <p>Anmerkungen zum Wimmelbild</p>
-          <nav class="legend__nav">
+          <p><a href="#info">Zu den Anmerkungen springen</a></p>
+          <nav id="nav" class="legend__nav">
+            <h3>Inhaltsverzeichnis</h3>
             <ol class="legend__nav__list">
               <li class="legend__nav__list-item">
                 <a class="legend__nav__link" href="#info1">Flugverkehr</a>
@@ -1510,7 +1516,7 @@
             </ol>
           </nav>
         </header>
-        <div class="legend__descriptions"></div>
+        <div id="info" class="legend__descriptions"></div>
       </section>
     </main>
   </body>
