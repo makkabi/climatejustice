@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", initWimmelPicture);
 
 function initWimmelPicture() {
+  initWimmelDialog();
   // addLinkToOutlines();
   // sortSvgOutlines();
   // addDescriptionsNavigation();
@@ -33,7 +34,52 @@ function initWimmelPicture() {
     );
   }
 
- // createLegendFromObject();
+  // createLegendFromObject();
+}
+
+function initWimmelDialog() {
+  const dialog = document.createElement("dialog");
+  dialog.classList.add("dialog");
+  dialog.insertAdjacentHTML(`<div class="dialog__content"></div>`);
+
+  document.body.insertAdjacentElement("beforeend", dialog);
+
+  if (!window.HTMLDialogElement) {
+    const script = document.createElement("script");
+    script.src = "js/src/dialog-polyfill.js";
+    script.onload = function() {
+      if (dialog && window.dialogPolyfill) {
+        window.dialogPolyfill.registerDialog(dialog);
+      }
+    };
+    document.head.append(script);
+  }
+
+  dialog.customShowModal = function() {
+    document.body.classList.add("open-modal-dialog");
+
+    document.body.addEventListener("click", dialog.closeDialogOnOutsideClick);
+
+    this.showModal();
+  };
+
+  dialog.closeDialogOnOutsideClick = function(e) {
+    const dialogContent = e.target.closest(".dialog__content");
+
+    if (!dialogContent && dialog.open) {
+      // Removing the eventListener won't work if the event is still being processed
+      e.stopPropagation();
+      dialog.close();
+    }
+  };
+
+  dialog.addEventListener("close", () => {
+    document.body.classList.remove("open-modal-dialog");
+    document.body.removeEventListener(
+      "click",
+      dialog.closeDialogOnOutsideClick
+    );
+  });
 }
 
 function handleOutlineMouseDown(e) {
