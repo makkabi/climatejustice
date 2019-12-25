@@ -110,7 +110,8 @@ function handleOutlineClick(e) {
   const id = clickedOutline.dataset.infoid;
   // Prevent modal from beeing immediately closed again.
   e.stopPropagation();
-  openModal(id);
+  setDialogContent(id);
+  document.querySelector(".dialog").customShowModal();
 }
 
 function handleKeydown(e) {
@@ -136,7 +137,8 @@ function handleKeydown(e) {
   const id = focusedOutline.dataset.infoid;
   // Prevent modal from beeing immediately closed again.
   e.stopPropagation();
-  openModal(id);
+  setDialogContent(id);
+  document.querySelector(".dialog").customShowModal();
 }
 
 function clearAllOutlines() {
@@ -147,12 +149,11 @@ function clearAllOutlines() {
   }
 }
 
-function openModal(selectedId) {
-  console.log(selectedId);
+function setDialogContent(selectedId) {
   selectedId = parseInt(selectedId);
 
   const description = descriptions.find(({ id }) => id === selectedId);
-  console.log(description);
+
   if (!description) {
     return;
   }
@@ -161,8 +162,6 @@ function openModal(selectedId) {
 
   dialog.querySelector(".dialog__title").innerHTML = description.title;
   dialog.querySelector(".dialog__text").innerHTML = description.text;
-
-  dialog.customShowModal();
 }
 
 function createLegendFromObject() {
