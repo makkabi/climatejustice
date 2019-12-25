@@ -3,7 +3,7 @@ var descriptions = [
     id: 1,
     title: "Flugverkehr",
     text:
-      "Die ressourcenintensive Mobilität der heutigen Zeit ist nicht nur klimaschädlich - Flugreisen sind auch höchst exklusiv: Nur etwa 10 Prozent der Weltbevölkerung hat überhaupt einmal ein Flugzeug betreten. Oft wird Besteuerung als Möglichkeit diskutiert, Flugreisen zu reduzieren. Dass Flüge derzeit oft billiger sind, als die gleiche Strecke per Bahn zurückzulegen (siehe <a href='#info25'>Flugverkehr</a>), ist angesichts der drohenden Klimakatastrophe tatsächlich erschreckend. Leider schränken steuerliche Maßnahmen aber genau jene Reichen, von denen die meisten Emissionen verursacht werden, am wenigsten ein.",
+      "Die ressourcenintensive Mobilität der heutigen Zeit ist nicht nur klimaschädlich - Flugreisen sind auch höchst exklusiv: Nur etwa 10 Prozent der Weltbevölkerung hat überhaupt einmal ein Flugzeug betreten. Oft wird Besteuerung als Möglichkeit diskutiert, Flugreisen zu reduzieren. Dass Flüge derzeit oft billiger sind, als die gleiche Strecke per Bahn zurückzulegen (siehe <a href='#info25'>Öffentliche Verkehrsmittel</a>), ist angesichts der drohenden Klimakatastrophe tatsächlich erschreckend. Leider schränken steuerliche Maßnahmen aber genau jene Reichen, von denen die meisten Emissionen verursacht werden, am wenigsten ein.",
   },
   {
     id: 2,
