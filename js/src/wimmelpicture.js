@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", initWimmelPicture);
 function initWimmelPicture() {
   addLinkToOutlines();
   sortSvgOutlines();
+  addDescriptionsNavigation();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   // Toggle mousedown class to prevent .focus class when elements are clicked.
   outlinesSvg.addEventListener("mousedown", handleOutlineMouseDown);
@@ -150,4 +151,15 @@ function addLinkToOutlines() {
       outline.innerHTML = linkHtml;
     }
   }
+}
+
+function addDescriptionsNavigation() {
+  const linksHtml = descriptions
+    .map(
+      ({ id, title }) =>
+        `<li class="legend__nav__list-item"><a class="legend__nav__link" href='#info${id}'>${title}</a></li>`
+    )
+    .join("");
+
+  document.querySelector(".legend__nav__list").innerHTML = linksHtml;
 }
