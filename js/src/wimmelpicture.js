@@ -74,6 +74,34 @@ function initWimmelDialog() {
       dialog.closeDialogOnOutsideClick
     );
   });
+
+  dialog
+    .querySelector(".dialog__content")
+    .addEventListener("click", handleDialogLinkClick);
+}
+
+function handleDialogLinkClick(e) {
+  const clickedElement = e.target;
+
+  const clickedLink = clickedElement.closest("a");
+  if (!clickedLink) {
+    return;
+  }
+
+  // The href attribute includes the full url
+  const idStart = clickedLink.href.indexOf("#info");
+  if (!Number.isInteger(idStart)) {
+    return;
+  }
+  const id = parseInt(clickedLink.href.substr(idStart + 5));
+
+  if (!id) {
+    return;
+  }
+
+  setDialogContent(id);
+  e.preventDefault();
+  e.stopPropagation();
 }
 
 function handleOutlineMouseDown(e) {
