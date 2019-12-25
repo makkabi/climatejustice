@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", initWimmelPicture);
 function initWimmelPicture() {
   addLinkToOutlines();
   sortSvgOutlines();
-  addDescriptionsNavigation();
+  // addDescriptionsNavigation();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   // Toggle mousedown class to prevent .focus class when elements are clicked.
   outlinesSvg.addEventListener("mousedown", handleOutlineMouseDown);
