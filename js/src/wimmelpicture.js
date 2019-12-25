@@ -38,11 +38,7 @@ function initWimmelPicture() {
 }
 
 function initWimmelDialog() {
-  const dialog = document.createElement("dialog");
-  dialog.classList.add("dialog");
-  dialog.insertAdjacentHTML(`<div class="dialog__content"></div>`);
-
-  document.body.insertAdjacentElement("beforeend", dialog);
+  const dialog = document.querySelector(".dialog");
 
   if (!window.HTMLDialogElement) {
     const script = document.createElement("script");
