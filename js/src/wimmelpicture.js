@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", initWimmelPicture);
 
 function initWimmelPicture() {
-  addTitleToOutlines();
+  addLinkToOutlines();
   sortSvgOutlines();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   // Toggle mousedown class to prevent .focus class when elements are clicked.
@@ -13,8 +13,6 @@ function initWimmelPicture() {
   outlinesSvg.addEventListener("keydown", handleKeydown);
 
   for (const outline of document.querySelectorAll(".wimmel__outlines > g")) {
-    outline.tabIndex = "0";
-
     outline.addEventListener("focus", e => {
       clearAllOutlines();
       if (e.currentTarget.classList.contains("mousedown")) {
@@ -44,6 +42,7 @@ function handleOutlineMouseDown(e) {
   }
   clickedOutline.classList.add("mousedown");
 }
+
 function handleOutlineMouseUp(e) {
   const outlines = e.currentTarget.querySelectorAll(".mousedown");
   for (const outline of outlines) {
@@ -52,6 +51,8 @@ function handleOutlineMouseUp(e) {
 }
 
 function handleOutlineClick(e) {
+  // Prevent scrolling to link target
+  e.preventDefault();
   const clickedElement = e.target;
   const clickedOutline = clickedElement.closest(".wimmel__outlines > g");
   if (
@@ -137,15 +138,16 @@ function sortSvgOutlines() {
   }
 }
 
-function addTitleToOutlines() {
+function addLinkToOutlines() {
   const outlines = [...document.querySelectorAll(".wimmel__outlines > g")];
 
   for (const outline of outlines) {
     const id = parseInt(outline.dataset.infoid);
     const info = descriptions.find(description => description.id === id);
     if (info) {
-      const titleHtml = `<title>${info.title}</title>`;
-      outline.insertAdjacentHTML("afterbegin", titleHtml);
+      const outlineContent = outline.innerHTML;
+      const linkHtml = `<title>${info.title}</title><a aria-label="${info.title}" href="#info${info.id}">${outlineContent}</a>`;
+      outline.innerHTML = linkHtml;
     }
   }
 }
