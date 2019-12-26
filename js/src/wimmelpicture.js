@@ -160,11 +160,7 @@ function handleOutlineClick(e) {
 
 function handleKeydown(e) {
   // I know .keyCode is deprecated, but it will work 100% in all relevant browsers
-  if (e.keyCode === 27) {
-    // Escape
-    clearAllOutlines();
-    return;
-  }
+
   if (![13, 32].includes(e.keyCode)) {
     // Space or Enter
     return;
@@ -177,14 +173,7 @@ function handleKeydown(e) {
   if (!focusedOutlineLink) {
     return;
   }
-  clearAllOutlines();
-  focusedOutlineLink.classList.add("clicked");
-  e.preventDefault();
-  const id = focusedOutlineLink.closest("g").dataset.infoid;
-  // Prevent modal from beeing immediately closed again.
-  e.stopPropagation();
-  setDialogContent(id);
-  document.querySelector(".dialog").customShowModal();
+  focusedOutlineLink.classList.add("keypressed");
 }
 
 function clearAllOutlines() {
