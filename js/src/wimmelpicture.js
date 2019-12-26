@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", initWimmelPicture);
 
 function initWimmelPicture() {
   initWimmelDialog();
-  // addLinkToOutlines();
+
   // sortSvgOutlines();
-  // addDescriptionsNavigation();
+
   addAriaAttributesToOutlineLinks();
   const outlinesSvg = document.querySelector(".wimmel__outlines");
   // Toggle mousedown class to prevent .focus class when elements are clicked.
@@ -41,8 +41,6 @@ function initWimmelPicture() {
       e.currentTarget.classList.remove("focus")
     );
   }
-
-  // createLegendFromObject();
 }
 
 function initWimmelDialog() {
@@ -192,23 +190,6 @@ function setDialogContent(selectedId) {
   dialog.querySelector(".dialog__text").innerHTML = description.text;
 }
 
-function createLegendFromObject() {
-  let html = "";
-  for (const { id, title, text } of descriptions) {
-    const descriptionHtml = `
-    <article class="legend__description" id="info${id}">
-    <h3>${id}. ${title}</h3>
-    <p>${text}</p>
-</article>
-    `;
-    html += descriptionHtml;
-  }
-
-  document
-    .querySelector(".legend__descriptions")
-    .insertAdjacentHTML("beforeend", html);
-}
-
 function sortSvgOutlines() {
   const outlines = [...document.querySelectorAll(".wimmel__outlines > g")];
 
@@ -231,31 +212,6 @@ function sortSvgOutlines() {
   for (const outline of outlines) {
     outlinesSvgContainer.insertAdjacentElement("beforeend", outline);
   }
-}
-
-function addLinkToOutlines() {
-  const outlines = [...document.querySelectorAll(".wimmel__outlines > g")];
-
-  for (const outline of outlines) {
-    const id = parseInt(outline.dataset.infoid);
-    const info = descriptions.find(description => description.id === id);
-    if (info) {
-      const outlineContent = outline.innerHTML;
-      const linkHtml = `<title>${info.title}</title><a aria-label="${info.title}" href="#info${info.id}">${outlineContent}</a>`;
-      outline.innerHTML = linkHtml;
-    }
-  }
-}
-
-function addDescriptionsNavigation() {
-  const linksHtml = descriptions
-    .map(
-      ({ id, title }) =>
-        `<li class="legend__nav__list-item"><a class="legend__nav__link" href='#info${id}'>${title}</a></li>`
-    )
-    .join("");
-
-  document.querySelector(".legend__nav__list").innerHTML = linksHtml;
 }
 
 function addAriaAttributesToOutlineLinks() {
