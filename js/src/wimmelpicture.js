@@ -84,9 +84,7 @@ function initWimmelDialog() {
     );
 
     // Return focus after closing dialog
-    const lastFocusedLink = document.querySelector(
-      ".wimmel__outline--clicked > a"
-    );
+    const lastFocusedLink = document.querySelector(".clicked");
     if (lastFocusedLink) {
       lastFocusedLink.focus();
     }
@@ -123,11 +121,13 @@ function handleDialogLinkClick(e) {
 
 function handleOutlineMouseDown(e) {
   const clickedElement = e.target;
-  const clickedOutline = clickedElement.closest(".wimmel__outlines > g");
-  if (!clickedOutline) {
+  const clickedOutlineLink = clickedElement.closest(
+    ".wimmel__outlines > g > a"
+  );
+  if (!clickedOutlineLink) {
     return;
   }
-  clickedOutline.classList.add("mousedown");
+  clickedOutlineLink.classList.add("mousedown");
 }
 
 function handleOutlineMouseUp(e) {
@@ -141,18 +141,17 @@ function handleOutlineClick(e) {
   // Prevent scrolling to link target
   e.preventDefault();
   const clickedElement = e.target;
-  const clickedOutline = clickedElement.closest(".wimmel__outlines > g");
-  if (
-    !clickedOutline ||
-    clickedOutline.classList.contains("wimmel__outline--clicked")
-  ) {
+  const clickedOutlineLink = clickedElement.closest(
+    ".wimmel__outlines > g > a"
+  );
+  if (!clickedOutlineLink || clickedOutlineLink.classList.contains("clicked")) {
     clearAllOutlines();
     return;
   }
   clearAllOutlines();
-  clickedOutline.classList.add("wimmel__outline--clicked");
-  clickedOutline.classList.remove("focus");
-  const id = clickedOutline.dataset.infoid;
+  clickedOutlineLink.classList.add("clicked");
+  clickedOutlineLink.classList.remove("focus");
+  const id = clickedOutlineLink.closest("g").dataset.infoid;
   // Prevent modal from beeing immediately closed again.
   e.stopPropagation();
   setDialogContent(id);
@@ -187,10 +186,8 @@ function handleKeydown(e) {
 }
 
 function clearAllOutlines() {
-  for (const outline of document.querySelectorAll(
-    ".wimmel__outline--clicked"
-  )) {
-    outline.classList.remove("wimmel__outline--clicked");
+  for (const outline of document.querySelectorAll(".clicked")) {
+    outline.classList.remove("clicked");
   }
 }
 
