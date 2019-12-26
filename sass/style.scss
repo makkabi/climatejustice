@@ -9,3 +9,9 @@
 *::after {
   box-sizing: border-box;
 }
+
+.no-js {
+  .use-svg {
+    display: none;
+  }
+}
