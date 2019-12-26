@@ -84,9 +84,12 @@ function initWimmelDialog() {
     );
 
     // Return focus after closing dialog
-    const lastFocusedLink = document.querySelector(".clicked");
+    const lastFocusedLink = document.querySelector(".keypressed");
     if (lastFocusedLink) {
       lastFocusedLink.focus();
+    }
+    for (const link of document.querySelectorAll(".keypressed")) {
+      link.classList.remove("keypressed");
     }
   });
 
