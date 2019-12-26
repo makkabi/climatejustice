@@ -23,7 +23,23 @@
       }
       &.focus {
         outline: 2px dotted greenyellow;
+        animation-name: focus-animation;
+        animation-duration: 0.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        @media (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
       }
     }
+  }
+}
+
+@keyframes focus-animation {
+  0% {
+    fill: rgba(233, 153, 61, 0.8);
+  }
+  100% {
+    fill: rgba(34, 233, 46, 0.8);
   }
 }
