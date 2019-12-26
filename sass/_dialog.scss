@@ -43,3 +43,9 @@ dialog.fixed {
   top: 50%;
   transform: translate(0, -50%);
 }
+
+.dialog {
+  &__content {
+    max-width: 50rem;
+  }
+}
