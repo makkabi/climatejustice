@@ -76,6 +76,14 @@ function initWimmelDialog() {
       "click",
       dialog.closeDialogOnOutsideClick
     );
+
+    // Return focus after closing dialog
+    const lastFocusedLink = document.querySelector(
+      ".wimmel__outline--clicked > a"
+    );
+    if (lastFocusedLink) {
+      lastFocusedLink.focus();
+    }
   });
 
   dialog
