@@ -19,7 +19,6 @@ function initWimmelPicture() {
     ".wimmel__outlines > g > a"
   )) {
     outlineLink.addEventListener("focus", e => {
-
       // Only add focus class if the element hasn't received the focus by mousedown
       if (e.currentTarget.classList.contains("mousedown")) {
         return;
@@ -130,6 +129,7 @@ function handleOutlineMouseDown(e) {
   if (!clickedOutlineLink) {
     return;
   }
+  // Class will prevent adding the .focus class
   clickedOutlineLink.classList.add("mousedown");
 }
 
@@ -147,7 +147,7 @@ function handleOutlineClick(e) {
   const clickedOutlineLink = clickedElement.closest(
     ".wimmel__outlines > g > a"
   );
-  if (!clickedOutlineLink ) {
+  if (!clickedOutlineLink) {
     return;
   }
 
