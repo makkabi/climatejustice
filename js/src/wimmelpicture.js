@@ -15,9 +15,12 @@ function initWimmelPicture() {
 
   outlinesSvg.addEventListener("keydown", handleKeydown);
 
-  for (const outline of document.querySelectorAll(".wimmel__outlines > g")) {
-    outline.addEventListener("focus", e => {
+  for (const outlineLink of document.querySelectorAll(
+    ".wimmel__outlines > g > a"
+  )) {
+    outlineLink.addEventListener("focus", e => {
       clearAllOutlines();
+      // Only add focus class if the element hasn't received the focus by mousedown
       if (e.currentTarget.classList.contains("mousedown")) {
         return;
       }
@@ -29,7 +32,7 @@ function initWimmelPicture() {
         position.top - window.innerHeight / 2
       );
     });
-    outline.addEventListener("focusout", e =>
+    outlineLink.addEventListener("focusout", e =>
       e.currentTarget.classList.remove("focus")
     );
   }
