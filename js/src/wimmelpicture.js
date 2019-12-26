@@ -171,14 +171,16 @@ function handleKeydown(e) {
   }
 
   const focusedElement = e.target;
-  const focusedOutline = focusedElement.closest(".wimmel__outlines > g");
-  if (!focusedOutline) {
+  const focusedOutlineLink = focusedElement.closest(
+    ".wimmel__outlines > g > a"
+  );
+  if (!focusedOutlineLink) {
     return;
   }
   clearAllOutlines();
-  focusedOutline.classList.add("wimmel__outline--clicked");
+  focusedOutlineLink.classList.add("clicked");
   e.preventDefault();
-  const id = focusedOutline.dataset.infoid;
+  const id = focusedOutlineLink.closest("g").dataset.infoid;
   // Prevent modal from beeing immediately closed again.
   e.stopPropagation();
   setDialogContent(id);
