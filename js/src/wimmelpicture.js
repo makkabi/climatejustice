@@ -28,8 +28,14 @@ function initWimmelPicture() {
       // Scroll the element into view. (.scrollIntoView() didn't work).
       const position = e.currentTarget.getBoundingClientRect();
       window.scrollTo(
-        position.left - window.innerWidth / 2,
-        position.top - window.innerHeight / 2
+        position.left +
+          position.width / 2 -
+          window.innerWidth / 2 +
+          window.scrollX,
+        position.top +
+          position.height / 2 -
+          window.innerHeight / 2 +
+          window.scrollY
       );
     });
     outlineLink.addEventListener("focusout", e =>
