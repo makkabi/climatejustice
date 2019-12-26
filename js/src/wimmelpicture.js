@@ -3,6 +3,16 @@ document.addEventListener("DOMContentLoaded", initWimmelPicture);
 function initWimmelPicture() {
   initWimmelDialog();
 
+  document.querySelector(".use-svg").addEventListener("click", e => {
+    document
+      .querySelector(".wimmel__picture")
+      .insertAdjacentHTML(
+        "afterbegin",
+        "<source type='image/svg+xml' srcset='img/climatejustice-wimmelpicture_by_foxitalic.svg'>"
+      );
+    e.currentTarget.disabled = true;
+  });
+
   // sortSvgOutlines();
 
   addAriaAttributesToOutlineLinks();
