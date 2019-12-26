@@ -19,7 +19,7 @@ function initWimmelPicture() {
     ".wimmel__outlines > g > a"
   )) {
     outlineLink.addEventListener("focus", e => {
-      clearAllOutlines();
+
       // Only add focus class if the element hasn't received the focus by mousedown
       if (e.currentTarget.classList.contains("mousedown")) {
         return;
@@ -147,12 +147,10 @@ function handleOutlineClick(e) {
   const clickedOutlineLink = clickedElement.closest(
     ".wimmel__outlines > g > a"
   );
-  if (!clickedOutlineLink || clickedOutlineLink.classList.contains("clicked")) {
-    clearAllOutlines();
+  if (!clickedOutlineLink ) {
     return;
   }
-  clearAllOutlines();
-  clickedOutlineLink.classList.add("clicked");
+
   clickedOutlineLink.classList.remove("focus");
   const id = clickedOutlineLink.closest("g").dataset.infoid;
   // Prevent modal from beeing immediately closed again.
@@ -177,12 +175,6 @@ function handleKeydown(e) {
     return;
   }
   focusedOutlineLink.classList.add("keypressed");
-}
-
-function clearAllOutlines() {
-  for (const outline of document.querySelectorAll(".clicked")) {
-    outline.classList.remove("clicked");
-  }
 }
 
 function setDialogContent(selectedId) {
